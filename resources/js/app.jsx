@@ -14,6 +14,10 @@ import CaseManager from './components/CaseManager';
 import PersonnelManager from './components/PersonnelManager';
 import InventoryManager from './components/InventoryManager';
 import StatisticsManager from './components/StatisticsManager';
+import LoginPage from './components/LoginPage';
+import ForgotPasswordPage from './components/ForgotPasswordPage';
+import ResetPasswordPage from './components/ResetPasswordPage';
+import AuthProvider from './components/AuthProvider';
 
 // Modern & Beautiful Theme
 const theme = createTheme({
@@ -89,7 +93,17 @@ function App() {
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <Routes>
-                <Route path="/" element={<Layout />}>
+                {/* Public Routes */}
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+                <Route path="/reset-password" element={<ResetPasswordPage />} />
+
+                {/* Protected Routes */}
+                <Route path="/" element={
+                    <AuthProvider>
+                        <Layout />
+                    </AuthProvider>
+                }>
                     <Route index element={<Dashboard />} />
                     <Route path="communities" element={<CommunityManager />} />
                     <Route path="facilities" element={<FacilityManager />} />
