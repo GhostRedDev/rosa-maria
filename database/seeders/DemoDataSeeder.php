@@ -109,6 +109,7 @@ class DemoDataSeeder extends Seeder
         // 5. Create Medical Cases & Stats
         $patients = Patient::all();
         $statuses = ['Open', 'Closed', 'Critical', 'Recovery'];
+        $faker = \Faker\Factory::create();
 
         foreach ($patients as $index => $patient) {
             // Create a case for 30% of patients
@@ -116,8 +117,8 @@ class DemoDataSeeder extends Seeder
                 MedicalCase::firstOrCreate(
                     ['title' => 'Caso Médico #' . ($index + 1), 'patient_id' => $patient->id],
                     [
-                        'description' => 'Paciente presenta síntomas de ' . fake()->randomElement(['Gripe', 'Dengue', 'Hipertensión']),
-                        'status' => fake()->randomElement($statuses),
+                        'description' => 'Paciente presenta síntomas de ' . $faker->randomElement(['Gripe', 'Dengue', 'Hipertensión']),
+                        'status' => $faker->randomElement($statuses),
                     ]
                 );
             }

@@ -69,17 +69,18 @@ class GuacaraSeeder extends Seeder
                             ]);
 
                             // 5. Create Families
+                            $faker = \Faker\Factory::create();
                             $family = Family::create([
-                                'name' => 'Familia ' . fake()->lastName(),
+                                'name' => 'Familia ' . $faker->lastName(),
                                 'house_id' => $house->id
                             ]);
 
                             // 6. Create Patients
                             Patient::create([
-                                'first_name' => fake()->firstName(),
-                                'last_name' => fake()->lastName(),
-                                'date_of_birth' => fake()->dateTimeBetween('-80 years', '-1 year'),
-                                'gender' => fake()->randomElement(['M', 'F']),
+                                'first_name' => $faker->firstName(),
+                                'last_name' => $faker->lastName(),
+                                'date_of_birth' => $faker->dateTimeBetween('-80 years', '-1 year'),
+                                'gender' => $faker->randomElement(['M', 'F']),
                                 'family_id' => $family->id
                             ]);
                         }
