@@ -12,7 +12,12 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, \Spatie\Permission\Traits\HasRoles;
+
+    public function workplace()
+    {
+        return $this->morphTo();
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -51,6 +56,6 @@ class User extends Authenticatable
 
     public function url(): Attribute
     {
-        return Attribute::get(fn ($value) => route('users.show', [$this]));
+        return Attribute::get(fn($value) => route('users.show', [$this]));
     }
 }

@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,21 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::domain('{project}.localhost')->group(function () {
-    Route::get('/', function ($project) {
-        return "Funcionou! Project = $project";
-    });
-});
+// API routes are handled in api.php, so we don't need to worry about them here.
+// We want all "web" interactions to be handled by our React app.
 
-
-Route::get('/', function () {
+Route::get('/{any}', function () {
     return view('welcome');
-});
+})->where('any', '.*');
 
-Route::get('/users', function () {
-    return User::all();
-});
-
-Route::get('/users/{user}', function (User $user) {
-    return $user;
-})->name('users.show');
