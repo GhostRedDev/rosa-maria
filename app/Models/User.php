@@ -50,12 +50,12 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    protected $appends = [
-        'url',
-    ];
+    // protected $appends = [
+    //     'url',
+    // ];
 
-    public function url(): Attribute
-    {
-        return Attribute::get(fn($value) => route('users.show', [$this]));
-    }
+    // public function url(): Attribute
+    // {
+    //     return Attribute::get(fn($value) => route('users.show', [$this]));
+    // }
 }
