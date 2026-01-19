@@ -25,8 +25,19 @@ use App\Http\Controllers\RoleController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/login', [App\Http\Controllers\AuthController::class, 'login']);
+Route::post('/forgot-password', [App\Http\Controllers\AuthController::class, 'forgotPassword']);
+Route::post('/reset-password', [App\Http\Controllers\AuthController::class, 'resetPassword']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [App\Http\Controllers\AuthController::class, 'logout']);
+    Route::get('/user', [App\Http\Controllers\AuthController::class, 'user']);
+    Route::get('/sidebar-stats', function () {
+        return response()->json([
+            'pending_reviews' => 12, // Mock
+            'active_alerts' => 5     // Mock
+        ]);
+    });
 });
 
 Route::middleware('api')->group(function () {
